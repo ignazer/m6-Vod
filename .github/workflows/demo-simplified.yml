@@ -1,0 +1,250 @@
+# Pipeline CI/CD Simplificado - Solo para Demo
+
+name: Demo Pipeline (Simplified)
+
+on:
+  workflow_dispatch:
+    inputs:
+      demo_stage:
+        description: 'Etapa a demostrar'
+        required: true
+        type: choice
+        options:
+        - '1. Code Quality'
+        - '2. Testing'
+        - '3. Build & Security'
+        - '4. Deploy Development'
+        - '5. Deploy Production'
+        - 'All Stages'
+
+jobs:
+  # DEMO STAGE 1: Code Quality
+  demo-code-quality:
+    name: "🔍 Demo: Code Quality & Linting"
+    runs-on: ubuntu-latest
+    if: contains(github.event.inputs.demo_stage, '1. Code Quality') || contains(github.event.inputs.demo_stage, 'All Stages')
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 📝 Simular ESLint
+      run: |
+        echo "🔍 Running ESLint..."
+        echo "✅ No linting errors found"
+        echo "📊 Code quality score: 95/100"
+        
+    - name: 🎨 Simular Prettier
+      run: |
+        echo "🎨 Checking code formatting..."
+        echo "✅ All files properly formatted"
+        
+    - name: 🔒 Simular SonarQube
+      run: |
+        echo "🔒 Running SonarQube analysis..."
+        echo "✅ Security: A grade"
+        echo "✅ Maintainability: A grade"
+        echo "✅ Reliability: A grade"
+
+  # DEMO STAGE 2: Testing
+  demo-testing:
+    name: "🧪 Demo: Testing Strategy"
+    runs-on: ubuntu-latest
+    needs: demo-code-quality
+    if: contains(github.event.inputs.demo_stage, '2. Testing') || contains(github.event.inputs.demo_stage, 'All Stages')
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🧪 Simular Unit Tests
+      run: |
+        echo "🧪 Running unit tests..."
+        echo "✅ 245 tests passed"
+        echo "📊 Code coverage: 87%"
+        
+    - name: 🔗 Simular Integration Tests
+      run: |
+        echo "🔗 Running integration tests..."
+        echo "✅ Database connection: OK"
+        echo "✅ Redis cache: OK"
+        echo "✅ API endpoints: OK"
+        
+    - name: 🚀 Simular E2E Tests
+      run: |
+        echo "🚀 Running end-to-end tests..."
+        echo "✅ User registration flow: PASS"
+        echo "✅ Video upload process: PASS"
+        echo "✅ Streaming functionality: PASS"
+
+  # DEMO STAGE 3: Build & Security
+  demo-build-security:
+    name: "🏗️ Demo: Build & Security Scanning"
+    runs-on: ubuntu-latest
+    needs: demo-testing
+    if: contains(github.event.inputs.demo_stage, '3. Build & Security') || contains(github.event.inputs.demo_stage, 'All Stages')
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🏗️ Simular Docker Build
+      run: |
+        echo "🏗️ Building Docker image..."
+        echo "📦 Image: vod-platform:demo-${{ github.run_number }}"
+        echo "✅ Multi-arch build completed (AMD64, ARM64)"
+        echo "📊 Image size: 245MB (optimized)"
+        
+    - name: 🔒 Simular Security Scan
+      run: |
+        echo "🔒 Scanning for vulnerabilities..."
+        echo "✅ No CRITICAL vulnerabilities found"
+        echo "⚠️  2 MEDIUM vulnerabilities found (non-blocking)"
+        echo "📊 Security score: 92/100"
+        
+    - name: 📋 Simular ECR Push
+      run: |
+        echo "📋 Pushing to Amazon ECR..."
+        echo "✅ Image pushed successfully"
+        echo "🏷️  Tagged as: latest, v1.2.${{ github.run_number }}"
+
+  # DEMO STAGE 4: Deploy Development
+  demo-deploy-dev:
+    name: "🚀 Demo: Deploy to Development"
+    runs-on: ubuntu-latest
+    needs: demo-build-security
+    if: contains(github.event.inputs.demo_stage, '4. Deploy Development') || contains(github.event.inputs.demo_stage, 'All Stages')
+    # environment: 
+    #   name: development
+    #   url: https://dev-vod.demo.com
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: ⚙️ Simular Kubectl Setup
+      run: |
+        echo "⚙️ Configuring kubectl..."
+        echo "✅ Connected to EKS cluster: vod-development"
+        
+    - name: 📦 Simular Helm Deploy
+      run: |
+        echo "📦 Deploying with Helm..."
+        echo "🎯 Namespace: development"
+        echo "🔢 Replicas: 1"
+        echo "💾 Resources: 100m CPU, 256Mi RAM"
+        echo "✅ Deployment successful!"
+        
+    - name: 🔍 Simular Health Check
+      run: |
+        echo "🔍 Running health checks..."
+        echo "✅ Application startup: OK"
+        echo "✅ Database connection: OK"
+        echo "✅ API health endpoint: OK"
+        echo "🌐 Service URL: https://dev-vod.demo.com"
+
+  # DEMO STAGE 5: Deploy Production
+  demo-deploy-prod:
+    name: "🏭 Demo: Blue-Green Production Deploy"
+    runs-on: ubuntu-latest
+    needs: demo-deploy-dev
+    if: contains(github.event.inputs.demo_stage, '5. Deploy Production') || contains(github.event.inputs.demo_stage, 'All Stages')
+    # environment: 
+    #   name: production
+    #   url: https://vod.demo.com
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🎯 Simular Blue-Green Setup
+      run: |
+        echo "🎯 Analyzing current deployment..."
+        echo "🔵 Current active color: BLUE"
+        echo "🟢 Deploying new version to: GREEN"
+        
+    - name: 🚀 Simular Green Deployment
+      run: |
+        echo "🚀 Deploying GREEN version..."
+        echo "🔢 Replicas: 10"
+        echo "💾 Resources: 1000m CPU, 2Gi RAM"
+        echo "⏱️  Deployment time: 3m 45s"
+        echo "✅ GREEN deployment successful!"
+        
+    - name: 🧪 Simular Smoke Tests
+      run: |
+        echo "🧪 Running production smoke tests..."
+        echo "✅ Load balancer health: OK"
+        echo "✅ Database connectivity: OK"
+        echo "✅ Cache layer: OK"
+        echo "✅ CDN integration: OK"
+        
+    - name: 🔄 Simular Traffic Switch
+      run: |
+        echo "🔄 Switching traffic to GREEN..."
+        echo "📊 Traffic split: 0% BLUE → 100% GREEN"
+        echo "⏱️  Switch completed in: 15 seconds"
+        echo "✅ Zero-downtime deployment achieved!"
+        
+    - name: 🧹 Simular Cleanup
+      run: |
+        echo "🧹 Cleaning up BLUE deployment..."
+        echo "🔵 BLUE scaled to 0 replicas (kept for rollback)"
+        echo "⏰ Scheduled for removal in 1 hour"
+        echo "✅ Production deployment complete!"
+
+  # DEMO SUMMARY
+  demo-summary:
+    name: "📊 Demo: Pipeline Summary"
+    runs-on: ubuntu-latest
+    needs: [demo-code-quality, demo-testing, demo-build-security, demo-deploy-dev, demo-deploy-prod]
+    if: always() && contains(github.event.inputs.demo_stage, 'All Stages')
+    
+    steps:
+    - name: 📊 Pipeline Results
+      run: |
+        echo "🎉 ===== PIPELINE DEMO COMPLETED ====="
+        echo ""
+        echo "📈 RESULTS SUMMARY:"
+        echo "✅ Code Quality: PASSED"
+        echo "✅ Testing Suite: PASSED" 
+        echo "✅ Security Scan: PASSED"
+        echo "✅ Development Deploy: SUCCESS"
+        echo "✅ Production Deploy: SUCCESS"
+        echo ""
+        echo "⏱️  TIMING:"
+        echo "🔍 Code Quality: 2m 30s"
+        echo "🧪 Testing: 8m 15s"
+        echo "🏗️  Build & Security: 5m 45s"
+        echo "🚀 Dev Deploy: 3m 20s"
+        echo "🏭 Prod Deploy: 6m 10s"
+        echo "📊 Total Pipeline Time: 26m 00s"
+        echo ""
+        echo "🌐 DEPLOYED ENVIRONMENTS:"
+        echo "• Development: https://dev-vod.demo.com"
+        echo "• Production: https://vod.demo.com"
+        echo ""
+        echo "🎯 DEMO OBJECTIVES ACHIEVED:"
+        echo "• ✅ End-to-end automation"
+        echo "• ✅ Multi-environment deployment"
+        echo "• ✅ Security integration"
+        echo "• ✅ Zero-downtime deployment"
+        echo "• ✅ Rollback capability"
+        echo ""
+        echo "🎓 Thank you for watching the demo!"
+
+  # Notification
+  demo-notify:
+    name: "📢 Demo: Notifications"
+    runs-on: ubuntu-latest
+    needs: demo-summary
+    if: always()
+    
+    steps:
+    - name: 📢 Simular Notificaciones
+      run: |
+        echo "📢 Sending notifications..."
+        echo "📱 Slack: ✅ Team notified"
+        echo "📧 Email: ✅ Stakeholders informed"
+        echo "📊 Monitoring: ✅ Metrics updated"
+        echo "🎉 Demo presentation complete!"
