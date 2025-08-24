@@ -1,0 +1,190 @@
+name: "VOD Platform - Demo Académico"
+
+# DEMO PARA INFORME ACADÉMICO
+# Este pipeline es únicamente para demostración educativa
+# NO EJECUTAR EN PRODUCCIÓN REAL
+
+on:
+  # Solo triggers manuales para demo
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Ambiente de demo'
+        required: true
+        default: 'development'
+        type: choice
+        options:
+          - development
+          - staging
+          - demo-only
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: vod-platform
+  
+jobs:
+  # ============================================================================
+  # STAGE 1: ANÁLISIS Y CALIDAD DE CÓDIGO
+  # ============================================================================
+  code-quality:
+    name: Análisis de Código
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+        
+      - name: Simulación de Code Analysis
+        run: |
+          echo "Ejecutando análisis estático de código..."
+          echo "SonarQube Analysis: PASSED"
+          echo "ESLint: 0 errores encontrados"
+          echo "Prettier: Formato correcto"
+          echo "Security Scan: Sin vulnerabilidades críticas"
+          
+      - name: Generar reporte de calidad
+        run: |
+          echo "REPORTE DE CALIDAD DE CÓDIGO"
+          echo "================================="
+          echo "• Cobertura de tests: 85%"
+          echo "• Complejidad ciclomática: Aceptable"
+          echo "• Deuda técnica: 2 horas"
+          echo "• Calificación general: A"
+
+  # ============================================================================
+  # STAGE 2: TESTING AUTOMATIZADO
+  # ============================================================================
+  testing:
+    name: Testing Suite
+    runs-on: ubuntu-latest
+    needs: code-quality
+    strategy:
+      matrix:
+        test-type: [unit, integration, e2e]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Simulación de Tests ${{ matrix.test-type }}
+        run: |
+          echo "Ejecutando tests ${{ matrix.test-type }}..."
+          case "${{ matrix.test-type }}" in
+            "unit")
+              echo "Unit Tests: 45/45 pasaron"
+              echo "Tiempo de ejecución: 2.3s"
+              ;;
+            "integration")
+              echo "Integration Tests: 12/12 pasaron"
+              echo "API endpoints: Funcionando"
+              ;;
+            "e2e")
+              echo "E2E Tests: 8/8 pasaron"
+              echo "User flows: Validados"
+              ;;
+          esac
+
+  # ============================================================================
+  # STAGE 3: BUILD Y CONTAINERIZACIÓN
+  # ============================================================================
+  build:
+    name: Build & Docker
+    runs-on: ubuntu-latest
+    needs: testing
+    outputs:
+      image-tag: ${{ steps.meta.outputs.tags }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Simulación de Build
+        run: |
+          echo "Compilando aplicación..."
+          echo "Frontend build: Completado"
+          echo "Backend build: Completado"
+          echo "Assets optimizados: 45% reducción"
+          
+      - name: Simulación de Docker Build
+        id: meta
+        run: |
+          IMAGE_TAG="vod-platform:demo-$(date +%Y%m%d)-${{ github.run_number }}"
+          echo "Construyendo imagen Docker..."
+          echo "Imagen creada: $IMAGE_TAG"
+          echo "Tamaño: 245MB"
+          echo "Vulnerabilidades: 0 críticas"
+          echo "tags=$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+  # ============================================================================
+  # STAGE 4: SECURITY SCANNING
+  # ============================================================================
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Simulación de Security Scan
+        run: |
+          echo "Ejecutando escaneo de seguridad..."
+          echo "Trivy scan: Sin vulnerabilidades críticas"
+          echo "Dependency check: Actualizado"
+          echo "SAST analysis: Passed"
+          echo "Secret detection: Clean"
+
+  # ============================================================================
+  # STAGE 5: DEPLOYMENT DEMO
+  # ============================================================================
+  deploy-demo:
+    name: Deployment Simulado
+    runs-on: ubuntu-latest
+    needs: [build, security]
+    if: github.event.inputs.environment != 'demo-only'
+    steps:
+      - name: Simulación de Deployment
+        run: |
+          echo "Desplegando en ambiente: ${{ github.event.inputs.environment }}"
+          echo "Terraform plan: Revisado"
+          echo "Kubernetes manifests: Aplicados"
+          echo "Health checks: Passed"
+          echo "Smoke tests: Ejecutados"
+          
+      - name: Estado del deployment
+        run: |
+          echo "ESTADO DEL DEPLOYMENT"
+          echo "========================"
+          echo "• Ambiente: ${{ github.event.inputs.environment }}"
+          echo "• Imagen: ${{ needs.build.outputs.image-tag }}"
+          echo "• Pods running: 3/3"
+          echo "• Load balancer: Activo"
+          echo "• URL: https://vod-demo.example.com"
+
+  # ============================================================================
+  # STAGE 6: MONITORING Y REPORTES
+  # ============================================================================
+  monitoring:
+    name: Monitoreo Post-Deploy
+    runs-on: ubuntu-latest
+    needs: deploy-demo
+    if: always()
+    steps:
+      - name: Simulación de Monitoring Setup
+        run: |
+          echo "Configurando monitoreo..."
+          echo "Prometheus: Configurado"
+          echo "Grafana dashboards: Creados"
+          echo "Alertas: Activas"
+          echo "Logs: Centralizados en CloudWatch"
+          
+      - name: Reporte final del pipeline
+        run: |
+          echo "PIPELINE DEMO COMPLETADO"
+          echo "============================"
+          echo "• Duración total: 8 minutos"
+          echo "• Tests ejecutados: 65"
+          echo "• Cobertura: 85%"
+          echo "• Security score: A+"
+          echo "• Performance: Óptimo"
+          echo ""
+          echo "Este demo muestra:"
+          echo "• CI/CD completo con GitHub Actions"
+          echo "• Testing automatizado multi-nivel"
+          echo "• Security scanning integrado"
+          echo "• Deployment blue-green"
+          echo "• Monitoring y observabilidad"

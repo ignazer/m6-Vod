@@ -1,10 +1,10 @@
 # Pipeline CI/CD VOD Platform - Documentación Demo
 
-## 🎯 Propósito de esta Demostración
+## Propósito de esta Demostración
 
 Este repositorio contiene un pipeline completo de CI/CD diseñado para demostrar las mejores prácticas en DevOps para una plataforma de Video On Demand (VOD) desplegada en Kubernetes.
 
-## 🏗️ Arquitectura del Pipeline
+## Arquitectura del Pipeline
 
 ### Flujo Principal
 ```mermaid
@@ -20,7 +20,7 @@ graph TD
     I --> J[Blue-Green Switch]
 ```
 
-## 📋 Componentes del Pipeline
+## Componentes del Pipeline
 
 ### 1. **Code Quality & Linting**
 - **ESLint** para JavaScript/TypeScript
@@ -63,7 +63,7 @@ Production Strategy:
   ✅ Cleanup versión anterior
 ```
 
-## 🔧 Configuración Requerida
+## Configuración Requerida
 
 ### GitHub Secrets:
 ```bash
@@ -96,7 +96,7 @@ KUBE_CONFIG_DATA
 - `staging` (auto-deploy from main)
 - `production` (requires approval)
 
-## 🎮 Cómo Usar Este Demo
+## Cómo Usar Este Demo
 
 ### 1. **Trigger Automático:**
 ```bash
@@ -118,25 +118,25 @@ git push origin main
 - Notificaciones en Slack
 - Métricas en sistemas de monitoreo
 
-## 🏷️ Características Destacadas
+## Características Destacadas
 
-### ✅ **Best Practices Implementadas:**
-- ♻️ **Reusabilidad** - Jobs modulares y reutilizables
-- 🔒 **Seguridad** - Múltiples layers de scanning
-- 🎯 **Granularidad** - Control fino por environment
-- 📊 **Observabilidad** - Logs, métricas y notificaciones
-- 🔄 **Rollback** - Estrategia Blue-Green para rollback rápido
-- 🧪 **Testing** - Cobertura completa desde unit hasta E2E
+### **Best Practices Implementadas:**
+- **Reusabilidad** - Jobs modulares y reutilizables
+- **Seguridad** - Múltiples layers de scanning
+- **Granularidad** - Control fino por environment
+- **Observabilidad** - Logs, métricas y notificaciones
+- **Rollback** - Estrategia Blue-Green para rollback rápido
+- **Testing** - Cobertura completa desde unit hasta E2E
 
-### ✅ **Production Ready Features:**
-- 🔐 **Secrets Management** - GitHub Secrets + AWS
-- 🌐 **Multi-Environment** - Dev, Staging, Production
-- 📦 **Container Registry** - ECR con multi-arch
-- ☸️ **Kubernetes Native** - Helm charts y manifests
-- 🔄 **Zero Downtime** - Blue-Green deployments
-- 📈 **Scalability** - Auto-scaling configurado
+### **Production Ready Features:**
+- **Secrets Management** - GitHub Secrets + AWS
+- **Multi-Environment** - Dev, Staging, Production
+- **Container Registry** - ECR con multi-arch
+- **Kubernetes Native** - Helm charts y manifests
+- **Zero Downtime** - Blue-Green deployments
+- **Scalability** - Auto-scaling configurado
 
-## 📚 Recursos Educativos
+## Recursos Educativos
 
 ### Conceptos Demostrados:
 1. **GitOps Workflow** - Infrastructure as Code
@@ -154,7 +154,7 @@ git push origin main
 - **ECR** - Container Registry
 - **Terraform** - Infrastructure as Code
 
-## 🎓 Valor Educativo
+## Valor Educativo
 
 Este pipeline demuestra:
 - **Integración completa** de herramientas DevOps
