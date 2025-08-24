@@ -58,7 +58,7 @@
 └─────────────────────────────────────────────────┘
 ```
 
-> ** Explicación:** Las instancias t3.large (2 vCPUs, 8GB RAM) son ideales para servicios web con cargas variables. El autoescalado permite manejar picos de tráfico automáticamente.
+> ** Explicación:** Las instancias t3.large (2 vCPUs, 8GB RAM) son ideales para servicios web con cargas variables. El autoescalado permite manejar picos de tráfico automáticamente..
 
 ### **Zona de Disponibilidad 1b - Optimizado para Cómputo**
 ```
