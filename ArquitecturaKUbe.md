@@ -34,7 +34,7 @@
 
 > ** Punto Clave:** El plano de control está completamente administrado por AWS, eliminando la complejidad operacional de mantener los masters de Kubernetes.
 
-## 🖥️ Nodos Worker - Distribución Multi-AZ
+## Nodos Worker - Distribución Multi-Availability Zone
 
 ### **Zona de Disponibilidad 1a - Propósito General**
 ```
